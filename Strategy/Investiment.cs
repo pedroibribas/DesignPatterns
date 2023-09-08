@@ -1,6 +1,4 @@
-﻿using System.Threading.Channels;
-
-namespace Strategy;
+﻿namespace BudgetApp;
 
 public class BankAccount
 {
@@ -9,6 +7,11 @@ public class BankAccount
     public BankAccount(double balance)
     {
         Balance = balance;
+    }
+
+    public void Deposit(double amount)
+    {
+        Balance += amount;
     }
 
     public double Invest(string strategy)
@@ -38,45 +41,57 @@ public class BankAccount
         return 0;
     }
 
-    public double Invest(IInvestimentStrategy investiment)
+    public double Invest(IInvestiment investiment)
     {
-        return investiment.GetInvestimentResult(Balance);
+        double result = investiment.Calculate(Balance);
+        Deposit(result * 0.75);
+        return Balance;
     }
 }
 
-public interface IInvestimentStrategy
+public interface IInvestiment
 {
-    double GetInvestimentResult(double balance);
+    double Calculate(double balance);
 }
-public class Conservative : IInvestimentStrategy
+public class Conservative : IInvestiment
 {
-    public double GetInvestimentResult(double balance)
+    public double Calculate(double balance)
     {
-        return balance * 0.08;
+        return balance * 0.008;
     }
 }
-public class Moderate : IInvestimentStrategy
+public class Moderate : IInvestiment
 {
-    public double GetInvestimentResult(double balance)
-    {
-        if (new Random().Next(101) < 50)
-            return balance * 0.25;
+    private readonly Random random;
 
-        return balance * 0.07;
+    public Moderate()
+    {
+        random = new Random();
+    }
+
+    public double Calculate(double balance)
+    {
+        if (random.Next(101) < 50)
+            return balance * 0.025;
+
+        return balance * 0.007;
     }
 }
-public class Brave : IInvestimentStrategy
+public class Brave : IInvestiment
 {
-    public double GetInvestimentResult(double balance)
+    private readonly Random random;
+
+    public Brave()
     {
-        int chance = new Random().Next(101);
+        random = new Random();
+    }
+
+    public double Calculate(double balance)
+    {
+        int chance = random.Next(101);
         
-        if (chance < 20)
-            return balance * 0.5;
-
-        if (chance < 30)
-            return balance * 0.3;
-        
-        return balance * 0.06;
+        if (chance >= 0 && chance <= 20) return balance * 0.5;
+        if (chance < 30) return balance * 0.3;
+        return balance * 0.006;
     }
 }

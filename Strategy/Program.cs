@@ -1,4 +1,4 @@
-﻿using Strategy;
+﻿using BudgetApp;
 
 /**
 * Os padrões de projeto resolvem problemas como:
@@ -9,11 +9,13 @@
 * - reduz classes alteráveis em uma manutenção 
 */
 
-// Exemplo Investiment.cs 
+// Exemplo Investiment.cs
+// Resumo: é feito um investimento financeiro a partir de 
+// um saldo bancário, conforme o nível de agressividade
+// do investidor, e é retornado o saldo resultante.
 
 BankAccount bankAccount = new(500);
-IInvestimentStrategy conservative = new Conservative();
-
+IInvestiment conservative = new Conservative();
 Console.WriteLine(bankAccount.Invest(conservative));
 
 
