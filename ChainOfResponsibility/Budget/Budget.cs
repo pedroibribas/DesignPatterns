@@ -1,4 +1,4 @@
-﻿namespace ChainOfResponsibility;
+﻿namespace ChainOfResponsibility.Budget;
 
 /// <summary>
 /// Orçamento.
@@ -125,7 +125,7 @@ class DiscountVendaCasada : IDiscount
     private static bool ItemsExist(List<Item> items, string[] names)
     {
         IEnumerable<Item> result = items
-            .Where(i => names.Any(n => String.Equals(i.Name, n, StringComparison.OrdinalIgnoreCase)));
+            .Where(i => names.Any(n => string.Equals(i.Name, n, StringComparison.OrdinalIgnoreCase)));
 
         return result.Count() == names.Length;
     }

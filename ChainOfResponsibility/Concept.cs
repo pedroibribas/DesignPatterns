@@ -2,30 +2,14 @@
 
 public interface IHandler
 {
-    IHandler? Next { get; set; }
-
+    IHandler? NextHandler { get; set; }
     dynamic? Handle(dynamic request);
 }
 
-public class Handler : IHandler
+public class FirstHandler : IHandler
 {
-    public IHandler? Next { get; set; }
+    public IHandler? NextHandler { get; set; }
 
-    public virtual dynamic? Handle(dynamic request)
-    {
-        return Next?.Handle(request);
-    }
-}
-
-public class FirstHandler : Handler
-{
-    public override dynamic? Handle(object request)
-    {
-        if (request as string == "FirstCondition")
-        {
-            return "First condition handled";
-        }
-
-        return base.Handle(request);
-    }
+    public dynamic? Handle(dynamic request) =>
+        NextHandler?.Handle(request);
 }

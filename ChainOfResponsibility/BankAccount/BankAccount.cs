@@ -1,4 +1,4 @@
-﻿namespace ChainOfResponsibility;
+﻿namespace ChainOfResponsibility.BankAccount;
 
 public enum Format
 {
@@ -47,9 +47,9 @@ public class BankRequestHandler
     }
 
     public string Handle(BankRequest bankRequest, BankAccount bankAccount)
-    {        
-       return _bankRequestHandler.Handle(GetHandlerRequest(bankRequest, bankAccount)) 
-            ?? "O resultado do handler é nulo.";
+    {
+        return _bankRequestHandler.Handle(GetHandlerRequest(bankRequest, bankAccount))
+             ?? "O resultado do handler é nulo.";
     }
 
     private static HandlerRequest GetHandlerRequest(
@@ -100,7 +100,7 @@ public class HandlerCsv : HandlerBase
     {
         if (request.Format == Format.CSV)
             return $"{request.Balance};{request.Owner}";
-        
+
         return base.Handle(request);
     }
 }

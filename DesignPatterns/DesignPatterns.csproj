@@ -9,6 +9,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ChainOfResponsibility\ChainOfResponsibility.csproj" />
+    <ProjectReference Include="..\Decorator\Decorator.csproj" />
+    <ProjectReference Include="..\TemplateMethod\TemplateMethod.csproj" />
   </ItemGroup>
 
 </Project>
