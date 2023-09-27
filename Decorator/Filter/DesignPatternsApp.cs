@@ -1,6 +1,4 @@
-﻿using Decorator.Budget;
-
-namespace Decorator.Filter;
+﻿namespace Decorator.Filter;
 
 public abstract class DesignPatternsApp : IDesignPatternsApp
 {

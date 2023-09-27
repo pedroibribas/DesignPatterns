@@ -1,7 +1,3 @@
-﻿using Decorator.Filter;
+﻿using State.BankAccount;
 
-//CoRPersonRequestConsoleApp.Run();
-
-//DecoratorBudgetApp.Run();
-
-new DecoratorFilterApp().Run();
+new StateBankAccountApp().Run();
