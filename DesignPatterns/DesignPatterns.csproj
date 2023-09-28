@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Builder\Builder.csproj" />
     <ProjectReference Include="..\ChainOfResponsibility\ChainOfResponsibility.csproj" />
     <ProjectReference Include="..\Decorator\Decorator.csproj" />
     <ProjectReference Include="..\State\State.csproj" />

@@ -1,3 +1,3 @@
-﻿using State.BankAccount;
+﻿using Builder.InvoiceApp;
 
-new StateBankAccountApp().Run();
+new BuilderInvoiceApp().Run();
