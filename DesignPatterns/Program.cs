@@ -1,3 +1,3 @@
-﻿using Builder.InvoiceApp;
+﻿using Observer.InvoiceApp;
 
-new BuilderInvoiceApp().Run();
+new ObserverInvoiceApp().Run();
