@@ -2,11 +2,12 @@ using DesignPatterns.Domain.Interfaces;
 using DesignPatterns.Utils;
 
 namespace DesignPatterns.DesignPatternApp.Templates;
-public abstract class DesignPatternApp : IDesignPatternApp
+
+public abstract class DesignPatternAppTemplate : IDesignPatternApp
 {
     public string AppName { get; private set; }
 
-    protected DesignPatternApp()
+    protected DesignPatternAppTemplate()
     {
         AppName = this.GetType().Name;
     }
@@ -17,10 +18,10 @@ public abstract class DesignPatternApp : IDesignPatternApp
             foregroundColor: ConsoleColor.Cyan,
             $"{AppName}");
 
-        List<string> results = new();
+        // List<string> results = new();
         try
         {
-            results = GetResults();
+            List<string> results = GetResults(new());
             ConsoleHandler.WriteManyLinesFormatted(results);
         }
         catch (Exception ex)
@@ -31,5 +32,5 @@ public abstract class DesignPatternApp : IDesignPatternApp
         }
     }
 
-    protected abstract List<string> GetResults();
+    protected abstract List<string> GetResults(List<string> results);
 }

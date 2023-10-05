@@ -1,6 +1,15 @@
 namespace DesignPatterns.Utils;
 public class ConsoleHandler
 {
+    public static string GetUserInput() => Console.ReadLine() ?? "";
+
+    public static bool UserPressedEscape() => Console.ReadKey().Key == ConsoleKey.Escape;
+
+    public static void WriteSingleLineError(string textLine)
+    {
+        WriteColoredSingleLine(ConsoleColor.Red, textLine);
+    }
+
     public static void WriteColoredSingleLine(ConsoleColor foregroundColor, string textLine)
     {
         Console.ForegroundColor = foregroundColor;
