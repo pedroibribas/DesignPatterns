@@ -4,7 +4,7 @@
  * DECORATOR -- Os algorítimos se compõem entre si.
  * 
  * O padrão Decorator serve quando há a necessidade de criar
- * comportamentos compostos por outros comportamentos.
+ * comportamentos compostos por outros comportamentos (e.g., filtros).
  * Além de reduzir a quantidade de código, esse padrão
  * torna genérica a combinação de comportamentos.
  * Assim a implementação de qualquer combinação é possível
