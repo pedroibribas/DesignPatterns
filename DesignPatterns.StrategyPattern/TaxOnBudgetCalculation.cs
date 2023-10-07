@@ -9,8 +9,7 @@ public class TaxOnBudgetCalculation : DesignPatternAppTemplate
 {
     protected override List<string> GetResults(List<string> results)
     {
-        IBudgetTax tax = new ICMS();
-        BalanceTaxCalculator balanceTaxCalculator = new(tax);
+        BalanceTaxCalculator balanceTaxCalculator = new(GetTax());
         Bugdet bugdet = new(balance: 500);
         double calcResult = balanceTaxCalculator.Calculate(bugdet.Balance);
         
@@ -18,4 +17,6 @@ public class TaxOnBudgetCalculation : DesignPatternAppTemplate
         
         return results;
     }
+
+    private IBudgetTax GetTax() => new ICMS();
 }

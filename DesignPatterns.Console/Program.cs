@@ -1,44 +1,26 @@
-﻿using DesignPatterns.StrategyPattern;
+﻿using DesignPatterns.Console;
 using DesignPatterns.Utils;
 
 do
 {
     try
     {
-        WriteHeader();
+        Output.Header();
+        string userInputNormalized = Output.GetUserInputNormalized();
+        
+        ConsoleHandler.WriteSingleLineDebug($"Dados de entrada: {userInputNormalized}", "DesignPatterns.Console/Program.cs");
 
-        string userInput = ConsoleHandler.GetUserInput();
-        int userInputInteger = UserInputHandler.GetUserInputInteger(userInput);
+        AppLoader appLoader = new(userInputNormalized);
+        appLoader.Load();
 
-        if (userInputInteger == 0) new TaxOnBudgetCalculation().Run();
-        else ConsoleHandler.WriteColoredSingleLine(ConsoleColor.Yellow, 
-            "Nenhuma aplicação para esse comando.");
+        IConsoleApp? app = appLoader.App;
+
+        if (app != null)
+            app.Run(userInputNormalized);
+        else Output.NoAppFoundAlert();
     }
     catch (Exception ex)
     {
         ConsoleHandler.WriteSingleLineError(ex.Message);
     }
 } while (!ConsoleHandler.UserPressedEscape());
-
-static void WriteHeader()
-{
-    ConsoleHandler.WriteColoredSingleLine(ConsoleColor.DarkCyan, "Rodando DesignPatterns.Console");
-    Console.WriteLine("Qual aplicação deve ser rodada pelo console?");
-    Console.WriteLine("Lista de aplicações disponíveis:");
-    foreach (AvailableAppsNames name in Enum.GetValues(typeof(AvailableAppsNames)))
-    {
-        Console.WriteLine("[{0}] {1}", (int)name, name);
-    }
-}
-
-
-public enum AvailableAppsNames
-{
-    TaxOnBudgetCalculation
-}
-
-
-public class UserInputHandler
-{
-    public static int GetUserInputInteger(string userInput) => int.Parse(userInput);
-}

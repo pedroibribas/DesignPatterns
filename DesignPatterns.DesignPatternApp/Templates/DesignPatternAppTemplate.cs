@@ -1,3 +1,4 @@
+using DesignPatterns.Domain.Dtos;
 using DesignPatterns.Domain.Interfaces;
 using DesignPatterns.Utils;
 
@@ -6,10 +7,12 @@ namespace DesignPatterns.DesignPatternApp.Templates;
 public abstract class DesignPatternAppTemplate : IDesignPatternApp
 {
     public string AppName { get; private set; }
+    protected UserInputDto UserInputDto { get; set; }
 
     protected DesignPatternAppTemplate()
     {
         AppName = this.GetType().Name;
+        UserInputDto = new();
     }
 
     public void Run()
@@ -17,8 +20,6 @@ public abstract class DesignPatternAppTemplate : IDesignPatternApp
         ConsoleHandler.WriteColoredSingleLine(
             foregroundColor: ConsoleColor.Cyan,
             $"{AppName}");
-
-        // List<string> results = new();
         try
         {
             List<string> results = GetResults(new());
@@ -30,6 +31,11 @@ public abstract class DesignPatternAppTemplate : IDesignPatternApp
                 foregroundColor: ConsoleColor.Red,
                 $"{ex.Message}");
         }
+    }
+
+    public void With(UserInputDto dto)
+    {
+        UserInputDto = dto;
     }
 
     protected abstract List<string> GetResults(List<string> results);

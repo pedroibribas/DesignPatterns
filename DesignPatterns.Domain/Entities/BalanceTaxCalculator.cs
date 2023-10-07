@@ -6,15 +6,11 @@ public class BalanceTaxCalculator
 {
     public IBudgetTax BudgetTax { get; private set; }
 
-    public BalanceTaxCalculator(IBudgetTax budgetTax)
-    {
+    public BalanceTaxCalculator(IBudgetTax budgetTax) => 
         BudgetTax = budgetTax;
-    }
 
-    public double Calculate(double budgetBalance)
-    {
-        return BudgetTax.Calculate(budgetBalance);
-    }
+    public double Calculate(double budgetBalance) => 
+        BudgetTax.Calculate(budgetBalance);
 }
 
 /*
