@@ -1,26 +1,32 @@
 ﻿using DesignPatterns.Console;
 using DesignPatterns.Utils;
 
-do
+do 
 {
+    ConsoleOutput.AppInitializationLine("### Você está rodando a aplicação de padrões de design! :-) ###");
+    ConsoleOutput.ListOptions(
+        header: "A lista de soluções de padrão para você escolher são as seguintes:",
+        type: ConsoleOutput.OptionType.PATTERNS_CONSOLE_APP);
+    ConsoleOutput.Question("Qual o comando da solução que você deseja rodar?");
+    
+    string userInput = ConsoleInput.GetUserInput();
+    
+    ConsoleOutput.DebugInput(userInput, "DesignPatterns.Console/Program.cs");
+
     try
     {
-        Output.Header();
-        string userInputNormalized = Output.GetUserInputNormalized();
-        
-        ConsoleHandler.WriteSingleLineDebug($"Dados de entrada: {userInputNormalized}", "DesignPatterns.Console/Program.cs");
-
-        AppLoader appLoader = new(userInputNormalized);
-        appLoader.Load();
-
-        IConsoleApp? app = appLoader.App;
-
-        if (app != null)
-            app.Run(userInputNormalized);
-        else Output.NoAppFoundAlert();
+        AppLoader.RunAppByCommand(userInput);
     }
     catch (Exception ex)
     {
         ConsoleHandler.WriteSingleLineError(ex.Message);
     }
-} while (!ConsoleHandler.UserPressedEscape());
+}
+while (!ConsoleHandler.UserPressedEscape());
+
+/*
+ * CONCEITOS
+ * - Output/ConsoleOutput:    Dado de saída da aplicação console.
+ * - Input/UserInput:         Command que o usuário envia para a aplicação console processar.
+ * - Command:                 Cadeia de caracteres que ativam um processamento da aplicação console. 
+ */

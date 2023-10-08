@@ -2,15 +2,8 @@ using DesignPatterns.Utils;
 
 namespace DesignPatterns.Console;
 
-public class UserInput
+public class ConsoleInput
 {
-    public string Input { get; private set; }
-
-    public UserInput(string input)
-    {
-        Input = input;
-    }
-
-    public string Normalized() =>
-        Input.ToLower();
+    public static string GetUserInput() =>
+        ConsoleHandler.GetUserInput();
 }
